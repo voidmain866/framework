@@ -23,8 +23,8 @@ namespace Irradiate\Api\Controllers;
 
 use Dingo\Api\Routing\Helpers;
 use Exception;
-use Irradiate\Eloquent\Employee;
 use Illuminate\Routing\Controller;
+use Irradiate\Eloquent\Employee;
 use Swagger\Annotations as SWG;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
