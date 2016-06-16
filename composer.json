@@ -1,0 +1,47 @@
+{
+  "name": "b-eight/framework",
+  "description": "The HRis Framework",
+  "keywords": [
+    "framework",
+    "rallyhr"
+  ],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Bertrand Kintanar",
+      "email": "bertrand.kintanar@gmail.com",
+      "role": "Creator & Designer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/tralves/Swaggervel"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/b-eight/framework/issues",
+    "source": "https://github.com/b-eight/framework"
+  },
+  "require": {
+    "php": ">=5.5.9",
+    "barryvdh/laravel-cors": "^0.7.1",
+    "cartalyst/sentinel": "^2.0",
+    "dingo/api": "dev-master",
+    "felixkiss/uniquewith-validator": "^2.0",
+    "jlapp/swaggervel": "master-dev",
+    "league/fractal": "^0.13.0",
+    "thomaswelton/laravel-gravatar": "^1.1",
+    "tymon/jwt-auth": "dev-develop"
+  },
+  "require-dev": {
+    "laravel/framework": "5.2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Irradiate\\": "src/Irradiate"
+    }
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}
