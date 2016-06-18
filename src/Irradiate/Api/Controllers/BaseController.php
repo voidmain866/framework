@@ -21,12 +21,12 @@
 
 namespace Irradiate\Api\Controllers;
 
+use Dingo\Api\Auth\Auth;
 use Dingo\Api\Routing\Helpers;
 use Exception;
 use Illuminate\Routing\Controller;
 use Irradiate\Eloquent\Employee;
 use Swagger\Annotations as SWG;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * @SWG\Swagger(
@@ -81,7 +81,7 @@ class BaseController extends Controller
      */
     protected function loggedEmployee()
     {
-        $user = JWTAuth::parseToken()->authenticate();
+        $user = app(Auth::class)->user();
 
         return $user->employee;
     }

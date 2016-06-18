@@ -21,24 +21,14 @@
 
 namespace Irradiate\Api\Requests;
 
+use Dingo\Api\Auth\Auth;
 use Dingo\Api\Http\FormRequest;
-use Irradiate\Eloquent\User;
-use Tymon\JWTAuth\JWTAuth;
 
 abstract class Request extends FormRequest
 {
     public $app_list_limit;
 
     public $logged_user;
-
-    public function __construct(JWTAuth $jwt, User $user)
-    {
-        $token = $jwt->getToken();
-        if (!empty($token)) {
-            $user = $jwt->toUser($token);
-            $this->logged_user = $user->find($user->id);
-        }
-    }
 
     /**
      * Get the sort param.
@@ -75,11 +65,13 @@ abstract class Request extends FormRequest
      */
     public function hasAccess($permission)
     {
+        $logged_user = app(Auth::class)->user();
+
         $methods = [
-            'DELETE' => $this->logged_user->hasAccess($permission.'.delete'),
-            'GET'    => $this->logged_user->hasAccess($permission.'.view'),
-            'PATCH'  => $this->logged_user->hasAccess($permission.'.update'),
-            'POST'   => $this->logged_user->hasAccess($permission.'.create'),
+            'DELETE' => $logged_user->hasAccess($permission.'.delete'),
+            'GET'    => $logged_user->hasAccess($permission.'.view'),
+            'PATCH'  => $logged_user->hasAccess($permission.'.update'),
+            'POST'   => $logged_user->hasAccess($permission.'.create'),
         ];
 
         return $methods[$this->getMethod()];
