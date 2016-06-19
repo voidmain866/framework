@@ -32,6 +32,7 @@
     "jlapp/swaggervel": "master-dev",
     "league/fractal": "^0.13.0",
     "thomaswelton/laravel-gravatar": "^1.1",
+    "lucadegasperi/oauth2-server-laravel": "5.1.*",
     "tymon/jwt-auth": "dev-develop"
   },
   "require-dev": {
