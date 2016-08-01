@@ -27,6 +27,7 @@ use Exception;
 use Illuminate\Routing\Controller;
 use Irradiate\Eloquent\Employee;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @SWG\Swagger(
@@ -73,7 +74,7 @@ class BaseController extends Controller
             ],
         ];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['api' => $data]);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, ['api' => $data]);
     }
 
     /**
@@ -102,10 +103,10 @@ class BaseController extends Controller
         try {
             $item = $model->create($request->all());
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_ADD_MESSAGE);
         }
 
-        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, [$name => $item]);
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_ADD_MESSAGE, [$name => $item]);
     }
 
     /**
@@ -150,7 +151,7 @@ class BaseController extends Controller
         $item = $model->whereId($model_id)->first();
 
         if (!$item) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
         try {
             if (!empty($only)) {
@@ -159,10 +160,10 @@ class BaseController extends Controller
                 $item->update($request->all());
             }
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -180,9 +181,9 @@ class BaseController extends Controller
         $response_code = $model->whereId($item->id)->delete();
 
         if (!$response_code) {
-            return $this->responseAPI(422, UNABLE_DELETE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_DELETE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_DELETE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_DELETE_MESSAGE);
     }
 }
