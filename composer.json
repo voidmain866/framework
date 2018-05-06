@@ -27,7 +27,7 @@
     "php": ">=5.5.9",
     "barryvdh/laravel-cors": "^0.7.1",
     "cartalyst/sentinel": "^2.0",
-    "dingo/api": "dev-master",
+    "dingo/api": "0.10.*",
     "felixkiss/uniquewith-validator": "^2.0",
     "jlapp/swaggervel": "master-dev",
     "league/fractal": "^0.17.0",
